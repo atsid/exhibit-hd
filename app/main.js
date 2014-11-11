@@ -27,13 +27,11 @@ app.get("/api/", function (req, res, next) {
 });
 
 app.get("/api/services", function (req, res, next) {
-    console.log("requested services");
     res.set("Content-Type", "application/ld+json");
     res.status(200).sendFile(__dirname + "/store/list.jsonld");
 });
 
 app.get("/api/services/:id", function (req, res, next) {
-    console.log("requested service: " + req.params.id);
     res.set("Content-Type", "application/ld+json");
     res.status(200).sendFile(__dirname + "/store/" + req.params.id + ".jsonld");
 });
