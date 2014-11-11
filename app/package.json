@@ -1,0 +1,16 @@
+{
+    "name": "exhibit-hd-node",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app/main.js"
+    },
+    "dependencies": {
+        "express": "3.2.3",
+        "newrelic": "*",
+        "mongodb": "*",
+        "rql": "*",
+        "async": "*",
+        "clone": "*"
+    }
+}
