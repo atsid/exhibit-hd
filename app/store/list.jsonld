@@ -1,10 +1,10 @@
 {
     "@context": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/Collection.jsonld",
     "@type": "Collection",
-    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/services",
+    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/api/services",
     "members": [
         {
-            "@id": "http://exhibit-hd-node.atsid.cloudbees.net/services/1",
+            "@id": "http://exhibit-hd-node.atsid.cloudbees.net/api/services/1",
             "@type": "vocab:Service"
         }
     ]
