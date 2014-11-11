@@ -43,7 +43,8 @@ schemaRegistry(app, {
 });
 
 serviceRegistry(app, {
-    middleware: [bodyParser.json()]
+    middleware: [bodyParser.json()],
+    zookeeperConfiguration: {zookeepers: "54.148.38.31:2181"}
 });
 
 http.createServer(app).listen(app.get('port'), function () {
