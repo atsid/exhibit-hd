@@ -4,7 +4,7 @@
 var express = require('express')
     , http = require('http')
     , path = require('path')
-    , registry = require('./registry-services')
+    , schemaRegistry = require('./schema-registry')
     , serviceRegistry = require('./service-registry')
     , bodyParser = require('body-parser');
 
@@ -37,7 +37,7 @@ app.get("/api/services/:id", function (req, res, next) {
 });
 
 
-registry(app, {
+schemaRegistry(app, {
     middleware: [bodyParser.json()],
     zookeeperConfiguration: {zookeepers: "54.148.38.31:2181"}
 });
