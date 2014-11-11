@@ -30,6 +30,14 @@ module.exports = function (app, config) {
         });
     });
 
+    app.get('/registry/:id', config.middleware, function (request, response, next) {
+        client.getData('/exhibit/' + request.params.id, function (err, obj) {
+            assert.ifError(err);
+            console.log('Found object with id ' + request.params.id);
+            response.status(200).send(JSON.parse(obj.toString())).end();
+        });
+    });
+
     app.put('/registry/:id', config.middleware, function (request, response, next) {
         console.log("save schema with id " + request.params.id);
 

@@ -5,6 +5,11 @@ module.exports = function (app, config) {
         response.end();
     });
 
+    app.get('/service-registry/:id', config.middleware, function (request, response, next) {
+        console.log("return individual service registry for " + request.params.id);
+        response.status(200).end();
+    });
+
     app.put('/service-registry/:id', config.middleware, function (request, response, next) {
         console.log("save registry entry with id " + request.params.id);
         response.status(200);
