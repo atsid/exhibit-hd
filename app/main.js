@@ -4,7 +4,8 @@
 var express = require('express')
     , http = require('http')
     , path = require('path')
-    , registry = require('./registry-services');
+    , registry = require('./registry-services')
+    , serviceRegistry = require('./service-registry');
 
 var app = express();
 
@@ -13,6 +14,10 @@ app.use(express.static(__dirname));
 app.use("/schema", express.static(__dirname + "/schema"));
 
 registry(app, {
+    middleware: [express.bodyParser()]
+});
+
+serviceRegistry(app, {
     middleware: [express.bodyParser()]
 });
 
