@@ -10,8 +10,15 @@ var express = require('express')
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
-app.use(express.static(__dirname));
-app.use("/schema", express.static(__dirname + "/schema"));
+
+var options = {
+    extensions: ["jsonld"],
+    setHeaders: function (res, path, stat) {
+        res.set("Content-Type", "application/ld+json");
+    }
+};
+
+app.use("/schema", express.static(__dirname + "/schema", options));
 
 //registry(app, {
 //    middleware: [express.bodyParser()],
