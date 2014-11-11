@@ -55,6 +55,9 @@ module.exports = function (app, config) {
                     assert.ifError(error);
 
                     console.log('Node: %s is created.', path);
+
+                    response.status(200);
+                    response.end();
                 }
             );
         };
@@ -67,14 +70,22 @@ module.exports = function (app, config) {
                 client.mkdirp(path, setZookeeperData);
             }
         });
-
-        response.status(200);
-        response.end();
     });
 
     app.delete('/registry/:id', config.middleware, function (request, response, next) {
-        console.log("delete schema with id " + request.params.id);
-        response.status(204);
-        response.end();
+        var path = '/exhibit/registry/' + request.params.id;
+        client.exists(path, function (err, status) {
+            if (status) {
+                client.remove(path, function (err) {
+                    assert.ifError(err);
+
+                    response.status(204);
+                    response.end();
+                })
+            } else {
+                response.status(404);
+                response.end();
+            }
+        });
     });
 }
