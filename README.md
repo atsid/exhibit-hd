@@ -1,0 +1,1 @@
+exhibit-hd is a JSON-LD service directory managed with zookeeper
