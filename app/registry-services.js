@@ -4,8 +4,8 @@ module.exports = function (app, config) {
     var async = require('async');
 
     var client = zookeeper.createClient(
-        '54.148.38.31:2181',
-        { sessionTimeout: 10000 }
+        config.zookeeperConfiguration.zookeepers,
+        {sessionTimeout: 10000}
     );
     client.connect();
 
@@ -15,15 +15,15 @@ module.exports = function (app, config) {
 
             var someObj = {};
 
-            async.each(nodes, function(id, callback) {
-                client.getData('/exhibit/' + id, function(err, obj) {
+            async.each(nodes, function (id, callback) {
+                client.getData('/exhibit/' + id, function (err, obj) {
                     assert.ifError(err);
                     console.log('Found object with id ' + id);
                     someObj[id] = JSON.parse(obj.toString());
 
                     callback();
                 })
-            }, function(err) {
+            }, function (err) {
                 assert.ifError(err);
                 response.send(someObj);
             })
@@ -34,7 +34,7 @@ module.exports = function (app, config) {
         console.log("save schema with id " + request.params.id);
 
         var path = '/exhibit/' + request.params.id;
-        client.mkdirp('/exhibit', function(err) {
+        client.mkdirp('/exhibit', function (err) {
             assert.ifError(err);
 
             client.create(

@@ -38,19 +38,14 @@ app.get("/api/services/:id", function (req, res, next) {
 });
 
 
-//registry(app, {
-//    middleware: [express.bodyParser()],
-//    zookeepers: {
-//        servers: [{
-//            host: '54.148.38.31',
-//            port: 2181
-//        }]
-//    }
-//});
-//
-//serviceRegistry(app, {
-//    middleware: [express.bodyParser()]
-//});
+registry(app, {
+    middleware: [express.bodyParser()],
+    zookeeperConfiguration: {zookeepers: "54.148.38.31:2181"}
+});
+
+serviceRegistry(app, {
+    middleware: [express.bodyParser()]
+});
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
