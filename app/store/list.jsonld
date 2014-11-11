@@ -1,10 +1,10 @@
 {
     "@context": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/vocab.jsonld",
     "@type": "vocab:Collection",
-    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/api/services",
+    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/mock-services",
     "members": [
         {
-            "@id": "http://exhibit-hd-node.atsid.cloudbees.net/api/services/1",
+            "@id": "http://exhibit-hd-node.atsid.cloudbees.net/mock-services/1",
             "@type": "vocab:ServiceInstance"
         }
     ]
