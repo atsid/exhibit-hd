@@ -46,6 +46,7 @@ module.exports = function (app, config) {
 
     app.put('/schema-registry/:id', config.middleware, function (request, response, next) {
 
+        var path = '/exhibit/registry/schema/' + request.params.id;
         var setZookeeperData = function (err) {
             assert.ifError(err);
 
@@ -65,7 +66,6 @@ module.exports = function (app, config) {
             );
         };
 
-        var path = '/exhibit/registry/schema/' + request.params.id;
         client.exists(path, function (err, status) {
             if (status) {
                 setZookeeperData(err);
