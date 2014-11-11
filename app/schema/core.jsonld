@@ -10,7 +10,7 @@
     "model": "schema:Text",
     "impl": "schema:string",
     "operation": {
-        "@type": "CreateResourceoperation",
+        "@type": "CreateResourceOperation",
         "method": "POST",
         "expects": {
             "@id": "exhibit:ServiceRegistration",

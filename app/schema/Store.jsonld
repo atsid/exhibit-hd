@@ -1,0 +1,193 @@
+{
+    "@context": {
+        "vocab": "http://exhibit-hd-node.atsid.cloudbees.net/schema/Store.jsonld#",
+        "hydra": "http://www.w3.org/ns/hydra/core#",
+        "ApiDocumentation": "hydra:ApiDocumentation",
+        "property": {
+            "@id": "hydra:property",
+            "@type": "@id"
+        },
+        "readonly": "hydra:readonly",
+        "writeonly": "hydra:writeonly",
+        "supportedClass": "hydra:supportedClass",
+        "supportedProperty": "hydra:supportedProperty",
+        "supportedOperation": "hydra:supportedOperation",
+        "method": "hydra:method",
+        "expects": {
+            "@id": "hydra:expects",
+            "@type": "@id"
+        },
+        "returns": {
+            "@id": "hydra:returns",
+            "@type": "@id"
+        },
+        "statusCodes": "hydra:statusCodes",
+        "code": "hydra:statusCode",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "label": "rdfs:label",
+        "description": "rdfs:comment",
+        "domain": {
+            "@id": "rdfs:domain",
+            "@type": "@id"
+        },
+        "range": {
+            "@id": "rdfs:range",
+            "@type": "@id"
+        },
+        "subClassOf": {
+            "@id": "rdfs:subClassOf",
+            "@type": "@id"
+        }
+    },
+    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/schema/Store.jsonld",
+    "@type": "ApiDocumentation",
+    "supportedClass": [{
+        "@id": "http://www.w3.org/ns/hydra/core#Resource",
+        "@type": "hydra:Class",
+        "hydra:title": "Resource",
+        "hydra:description": null,
+        "supportedOperation": [ ],
+        "supportedProperty": [ ]
+    }, {
+        "@id": "http://www.w3.org/ns/hydra/core#Collection",
+        "@type": "hydra:Class",
+        "hydra:title": "Collection",
+        "hydra:description": null,
+        "supportedOperation": [ ],
+        "supportedProperty": [{
+            "property": "http://www.w3.org/ns/hydra/core#member",
+            "hydra:title": "members",
+            "hydra:description": "The members of this collection.",
+            "required": null,
+            "readonly": false,
+            "writeonly": false
+        }]
+    }, {
+        "@id": "vocab:Catalog",
+        "@type": "hydra:Class",
+        "subClassOf": null,
+        "label": "Product Catalog",
+        "description": "The Catalog is the storefront for viewing and buying products.",
+        "supportedOperation": [{
+            "@id": "_:entry_point",
+            "@type": "hydra:Operation",
+            "method": "GET",
+            "label": "The main entrance to the storefront",
+            "expects": null,
+            "returns":"vocab:Catalog",
+            "statusCodes": []
+        }],
+        "supportedProperty": [{
+            "property": {
+                "@id": "vocab:Catalog/products",
+                "@type": "hydra:Link",
+                "label": "products",
+                "description": "List of available products",
+                "domain": "vocab:Catalog",
+                "range": "http://www.w3.org/ns/hydra/core#Collection",
+                "supportedOperation": [{
+                    "@id": "_:product_create",
+                    "@type": "hydra:Operation",
+                    "method": "POST",
+                    "label": "Create a new Product",
+                    "description": null,
+                    "expects": "vocab:Product",
+                    "returns": "vocab:Product",
+                    "statusCodes": [{
+                        "code": 201,
+                        "description": "The new Product was successfully created."
+                    }]
+                }, {
+                    "@id": "_:product_list",
+                    "@type": "hydra:Operation",
+                    "method": "GET",
+                    "label": "Get the list of Products",
+                    "description": null,
+                    "expects": null,
+                    "returns": "http://www.w3.org/ns/hydra/core#Collection",
+                    "statusCodes": []
+                }]
+            },
+            "hydra:title": "products",
+            "hydra:description": "List of available products",
+            "required": null,
+            "readonly": true,
+            "writeonly": false
+        }]
+    },{
+        "@id": "vocab:Product",
+        "@type": "hydra:Class",
+        "subClassOf": null,
+        "label": "Product",
+        "description": "Represents a product available in the store.",
+        "supportedOperation": [{
+            "@id": "_:product_read",
+            "@type": "hydra:Operation",
+            "method": "GET",
+            "label": "Read a Product entity",
+            "description": "Retrieve an existing Product entity.",
+            "expects": "null",
+            "returns": "vocab:Product",
+            "statusCodes": [{
+                "code": 404,
+                "description": "The Product you are trying to retrieve does not exist."
+            }]
+        }, {
+            "@id": "_:product_replace",
+            "@type": "hydra:Operation",
+            "method": "PUT",
+            "label": "Replaces a Product entity",
+            "description": "Complete update to an existing Product entity, via PUT replacement.",
+            "expects": "vocab:Product",
+            "returns": "vocab:Product",
+            "statusCodes": [{
+                "code": 400,
+                "description": "The Product you are submitting is malformed."
+            }]
+        }, {
+            "@id": "_:product_delete",
+            "@type": "hydra:Operation",
+            "method": "DELETE",
+            "label": "Remove a Product entity",
+            "description": "Complete removal of an existing Product entity.",
+            "expects": "null",
+            "returns": "http://www.w3.org/2002/07/owl#Nothing",
+            "statusCodes": [{
+                "code": 404,
+                "description": "The Product you are trying to remove does not exist."
+            }]
+        }],
+        "supportedProperty": [{
+            "property": {
+                "@id": "vocab:Product/name",
+                "@type": "rdf:Property",
+                "label": "name",
+                "description": "The name of the Product",
+                "domain": "vocab:Product",
+                "range": "http://www.w3.org/2001/XMLSchema#string",
+                "supportedOperation": []
+            },
+            "hydra:title": "name",
+            "hydra:description": "The name of the Product",
+            "required": true,
+            "readonly": false,
+            "writeonly": false
+        }, {
+            "property": {
+                "@id": "vocab:Product/price",
+                "@type": "rdf:Property",
+                "label": "price",
+                "description": "The price of the Product",
+                "domain": "vocab:Product",
+                "range": "http://www.w3.org/2001/XMLSchema#decimal",
+                "supportedOperation": []
+            },
+            "hydra:title": "price",
+            "hydra:description": "The price of the Product",
+            "required": true,
+            "readonly": false,
+            "writeonly": false
+        }]
+    }]
+}
