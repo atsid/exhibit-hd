@@ -1,0 +1,11 @@
+{
+    "@context": {
+        "hydra": "http://www.w3.org/ns/hydra/core#",
+        "vocab": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/vocab#",
+        "EntryPoint": "vocab:EntryPoint",
+        "services": {
+            "@id": "vocab:EntryPoint/services",
+            "@type": "@id"
+        }
+    }
+}
