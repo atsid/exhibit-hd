@@ -1,6 +1,6 @@
 {
-    "@context": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/Collection.jsonld",
-    "@type": "Collection",
+    "@context": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/vocab.jsonld",
+    "@type": "vocab:Collection",
     "@id": "http://exhibit-hd-node.atsid.cloudbees.net/api/services",
     "members": [
         {

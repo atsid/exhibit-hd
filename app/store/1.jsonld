@@ -1,7 +1,7 @@
 {
-    "@context": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/Service.jsonld",
+    "@context": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/vocab.jsonld",
     "@id": "http://exhibit-hd-node.atsid.cloudbees.net/api/services/1",
-    "@type": "Service",
+    "@type": "vocab:Service",
     "name": "Storefront Service",
     "root": "http://exhibit-hd-node.atsid.cloudbees.net/example"
 }
