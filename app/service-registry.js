@@ -45,9 +45,33 @@ module.exports = function (app, config) {
     });
 
     app.put('/service-registry/:id', config.middleware, function (request, response, next) {
-        console.log("save registry entry with id " + request.params.id);
-        response.status(200);
-        response.end();
+        var path = '/exhibit/registry/service/' + request.params.id;
+        var setZookeeperData = function (err) {
+            assert.ifError(err);
+
+            client.setData(
+                path,
+                new Buffer(JSON.stringify(request.body)),
+                function (error, path) {
+                    if (error) {
+                        console.log('Failed to create node: %s due to: %s.', path, error);
+                    }
+
+                    assert.ifError(error);
+
+                    response.status(200);
+                    response.end();
+                }
+            );
+        };
+
+        client.exists(path, function (err, status) {
+            if (status) {
+                setZookeeperData(err);
+            } else {
+                client.mkdirp(path, setZookeeperData);
+            }
+        });
     });
 
     app.post('/service-registry/', config.middleware, function (request, response, next) {
