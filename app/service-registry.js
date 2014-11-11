@@ -75,9 +75,29 @@ module.exports = function (app, config) {
     });
 
     app.post('/service-registry/', config.middleware, function (request, response, next) {
-        console.log("save new registry entry");
-        response.status(201);
-        response.end();
+        var path = '/exhibit/registry/service/autogenid';
+        var setZookeeperData = function (err, newpath) {
+            assert.ifError(err);
+
+            console.log("new path " + newpath)
+
+            client.setData(
+                newpath,
+                new Buffer(JSON.stringify(request.body)),
+                function (error, param) {
+                    if (error) {
+                        console.log('Failed to create node: %s due to: %s.', path, error);
+                    }
+
+                    assert.ifError(error);
+
+                    response.status(200);
+                    response.end();
+                }
+            );
+        };
+
+        client.mkdirp(path, 2, setZookeeperData);
     });
 
     app.delete('/service-registry/:id', config.middleware, function (request, response, next) {
