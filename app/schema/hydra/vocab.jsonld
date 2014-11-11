@@ -1,6 +1,6 @@
 {
     "@context": {
-        "vocab": "http://exhibit-hd-node.atsid.cloudbees.net/schema/Hydra-Demo.jsonld#",
+        "vocab": "http://exhibit-hd-node.atsid.cloudbees.net/schema/hydra/vocab#",
         "hydra": "http://www.w3.org/ns/hydra/core#",
         "ApiDocumentation": "hydra:ApiDocumentation",
         "property": {
@@ -40,7 +40,7 @@
             "@type": "@id"
         }
     },
-    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/schema/Hydra-Demo.jsonld",
+    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/schema/hydra/vocab",
     "@type": "ApiDocumentation",
     "supportedClass": [
         {
