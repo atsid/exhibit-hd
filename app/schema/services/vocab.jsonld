@@ -69,28 +69,10 @@
             ]
         },
         {
-            "@id": "vocab:Model",
+            "@id": "vocab:Service",
             "@type": "hydra:Class",
             "subClassOf": null,
-            "label": "Model",
-            "description": "Represents a service model schema",
-            "supportedOperation": [],
-            "supportedProperty": []
-        },
-        {
-            "@id": "vocab:Channel",
-            "@type": "hydra:Class",
-            "subClassOf": null,
-            "label": "Channel",
-            "description": "Represents a channel schema",
-            "supportedOperation": [],
-            "supportedProperty": []
-        },
-        {
-            "@id": "vocab:ServiceInstance",
-            "@type": "vocab:Model",
-            "subClassOf": null,
-            "label": "ServiceInstance",
+            "label": "Service",
             "description": "A Service registered in the system.",
             "supportedOperation": [
                 {
@@ -100,18 +82,18 @@
                     "label": "Retrieves a Service entity",
                     "description": null,
                     "expects": null,
-                    "returns": "vocab:ServiceInstance",
+                    "returns": "vocab:Service",
                     "statusCodes": []
                 }
             ],
             "supportedProperty": [
                 {
                     "property": {
-                        "@id": "vocab:ServiceInstance/name",
+                        "@id": "vocab:Service/name",
                         "@type": "rdf:Property",
                         "label": "name",
                         "description": "The Service name",
-                        "domain": "vocab:ServiceInstance",
+                        "domain": "vocab:Service",
                         "range": "http://www.w3.org/2001/XMLSchema#string",
                         "supportedOperation": []
                     },
@@ -123,11 +105,11 @@
                 },
                 {
                     "property": {
-                        "@id": "vocab:ServiceInstance/root",
+                        "@id": "vocab:Service/root",
                         "@type": "rdf:Property",
                         "label": "root",
                         "description": "The Service root path",
-                        "domain": "vocab:ServiceInstance",
+                        "domain": "vocab:Service",
                         "range": "http://www.w3.org/2001/XMLSchema#string",
                         "supportedOperation": []
                     },
@@ -139,16 +121,16 @@
                 },
                 {
                     "property": {
-                        "@id": "vocab:ServiceInstance/model",
+                        "@id": "vocab:Service/model",
                         "@type": "@id",
                         "label": "model",
-                        "description": "Model ID that the service implements",
-                        "domain": "vocab:ServiceInstance",
+                        "description": "Model ID that this service provides an implementation for.",
+                        "domain": "vocab:Service",
                         "range": "http://www.w3.org/2001/XMLSchema#string",
                         "supportedOperation": []
                     },
                     "hydra:title": "model",
-                    "hydra:description": "Model ID that the service implements",
+                    "hydra:description": "Model ID that this service provides an implementation for.",
                     "required": null,
                     "readonly": false,
                     "writeonly": false

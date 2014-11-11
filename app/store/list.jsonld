@@ -5,7 +5,7 @@
     "members": [
         {
             "@id": "http://exhibit-hd-node.atsid.cloudbees.net/api/services/1",
-            "@type": "vocab:ServiceInstance"
+            "@type": "vocab:Service"
         }
     ]
 }
