@@ -118,6 +118,22 @@
                     "required": null,
                     "readonly": false,
                     "writeonly": false
+                },
+                {
+                    "property": {
+                        "@id": "vocab:Service/model",
+                        "@type": "@id",
+                        "label": "model",
+                        "description": "Model ID that this service provides an implementation for.",
+                        "domain": "vocab:Service",
+                        "range": "http://www.w3.org/2001/XMLSchema#string",
+                        "supportedOperation": []
+                    },
+                    "hydra:title": "model",
+                    "hydra:description": "Model ID that this service provides an implementation for.",
+                    "required": null,
+                    "readonly": false,
+                    "writeonly": false
                 }
             ]
         },
