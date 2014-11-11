@@ -5,7 +5,8 @@ var express = require('express')
     , http = require('http')
     , path = require('path')
     , registry = require('./registry-services')
-    , serviceRegistry = require('./service-registry');
+    , serviceRegistry = require('./service-registry')
+    , bodyParser = require('body-parser');
 
 var app = express();
 
@@ -39,12 +40,12 @@ app.get("/api/services/:id", function (req, res, next) {
 
 
 registry(app, {
-    middleware: [express.bodyParser()],
+    middleware: [bodyParser.json()],
     zookeeperConfiguration: {zookeepers: "54.148.38.31:2181"}
 });
 
 serviceRegistry(app, {
-    middleware: [express.bodyParser()]
+    middleware: [bodyParser.json()]
 });
 
 http.createServer(app).listen(app.get('port'), function () {
