@@ -1,7 +1,0 @@
-{
-    "@context": "http://exhibit-hd-node.atsid.cloudbees.net/schema",
-    "@type": "Link",
-    "rel": "http://schema.org/Text",
-    "method": "http://schema.org/Text",
-    "href": "http://schema.org/Text"
-}
