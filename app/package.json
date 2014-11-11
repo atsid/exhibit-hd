@@ -10,7 +10,8 @@
         "newrelic": "*",
         "mongodb": "*",
         "rql": "*",
-        "async": "*",
-        "clone": "*"
+        "async": "0.9.0",
+        "clone": "*",
+        "node-zookeeper-client": "0.2.1"
     }
 }

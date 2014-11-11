@@ -1,54 +1,56 @@
 module.exports = function (app, config) {
     var assert = require('assert');
-    var zkplus = require('zkplus');
+    var zookeeper = require('node-zookeeper-client');
+    var async = require('async');
 
-    var client = zkplus.createClient(config.zookeepers);
+    var client = zookeeper.createClient(
+        '54.148.38.31:2181',
+        { sessionTimeout: 10000 }
+    );
     client.connect();
 
     app.get('/registry', config.middleware, function (request, response, next) {
-        console.log("return list of all schemas filtered by param type (type name is TBD)");
-
-
-        client.readdir('/objects', function (err, nodes) {
+        client.getChildren('/exhibit', function (err, nodes) {
             assert.ifError(err);
 
             var someObj = {};
-            var requiredCount = nodes.length;
-            var foundCount = 0;
 
-            for (var i = 0; i < nodes.length; i++) {
-                var id = nodes[i];
-                client.get('/objects/' + id, function(err, obj) {
-                    someObj[id] = obj;
+            async.each(nodes, function(id, callback) {
+                client.getData('/exhibit/' + id, function(err, obj) {
+                    assert.ifError(err);
+                    console.log('Found object with id ' + id);
+                    someObj[id] = JSON.parse(obj.toString());
 
-                    console.log("Wrining " + id);
-
-                    foundCount++;
-                    if(foundCount == requiredCount) {
-                        console.log("Writing response " + someObj);
-                        response.send(someObj);
-                    }
+                    callback();
                 })
-            }
-            console.log("Exiting function");
-            //response.send(someObj);
-            //console.log(nodes); // => ['00000000', 'baz']
-            //response.send(someObj);
+            }, function(err) {
+                assert.ifError(err);
+                response.send(someObj);
+            })
         });
-
-/*        client.get('/objects', function(err, obj) {
-            response.send(obj);
-        });*/
     });
 
     app.put('/registry/:id', config.middleware, function (request, response, next) {
         console.log("save schema with id " + request.params.id);
 
-        client.mkdirp('/objects', function(err) {
+        var path = '/exhibit/' + request.params.id;
+        client.mkdirp('/exhibit', function(err) {
             assert.ifError(err);
-        });
-        client.put('/objects/' + request.params.id, request.body, function(err) {
-            assert.ifError(err);
+
+            client.create(
+                path,
+                new Buffer(JSON.stringify(request.body)),
+                //CreateMode.EPHEMERAL,
+                function (error, path) {
+                    if (error) {
+                        console.log('Failed to create node: %s due to: %s.', path, error);
+                    }
+
+                    assert.ifError(error);
+
+                    console.log('Node: %s is created.', path);
+                }
+            );
         });
 
         response.status(200);
