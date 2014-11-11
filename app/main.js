@@ -10,6 +10,7 @@ var app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname));
+app.use("/schema", express.static(__dirname + "/schema"));
 
 registry(app, {
     middleware: [express.bodyParser()]
