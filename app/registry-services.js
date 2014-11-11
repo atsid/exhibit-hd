@@ -10,13 +10,13 @@ module.exports = function (app, config) {
     client.connect();
 
     app.get('/registry', config.middleware, function (request, response, next) {
-        client.getChildren('/exhibit', function (err, nodes) {
+        client.getChildren('/exhibit/registry', function (err, nodes) {
             assert.ifError(err);
 
             var someObj = {};
 
             async.each(nodes, function (id, callback) {
-                client.getData('/exhibit/' + id, function (err, obj) {
+                client.getData('/exhibit/registry/' + id, function (err, obj) {
                     assert.ifError(err);
                     console.log('Found object with id ' + id);
                     someObj[id] = JSON.parse(obj.toString());
@@ -31,7 +31,7 @@ module.exports = function (app, config) {
     });
 
     app.get('/registry/:id', config.middleware, function (request, response, next) {
-        client.getData('/exhibit/' + request.params.id, function (err, obj) {
+        client.getData('/exhibit/registry/' + request.params.id, function (err, obj) {
             assert.ifError(err);
             console.log('Found object with id ' + request.params.id);
             response.status(200).send(JSON.parse(obj.toString())).end();
@@ -41,14 +41,12 @@ module.exports = function (app, config) {
     app.put('/registry/:id', config.middleware, function (request, response, next) {
         console.log("save schema with id " + request.params.id);
 
-        var path = '/exhibit/' + request.params.id;
-        client.mkdirp('/exhibit', function (err) {
+        var setZookeeperData = function (err) {
             assert.ifError(err);
 
-            client.create(
+            client.setData(
                 path,
                 new Buffer(JSON.stringify(request.body)),
-                //CreateMode.EPHEMERAL,
                 function (error, path) {
                     if (error) {
                         console.log('Failed to create node: %s due to: %s.', path, error);
@@ -59,6 +57,15 @@ module.exports = function (app, config) {
                     console.log('Node: %s is created.', path);
                 }
             );
+        };
+
+        var path = '/exhibit/registry/' + request.params.id;
+        client.exists(path, function (err, status) {
+            if (status) {
+                setZookeeperData(err);
+            } else {
+                client.mkdirp(path, setZookeeperData);
+            }
         });
 
         response.status(200);
