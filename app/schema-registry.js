@@ -9,7 +9,7 @@ module.exports = function (app, config) {
     );
     client.connect();
 
-    app.get('/registry', config.middleware, function (request, response, next) {
+    app.get('/schema-registry', config.middleware, function (request, response, next) {
         client.getChildren('/exhibit/registry', function (err, nodes) {
             assert.ifError(err);
 
@@ -29,7 +29,7 @@ module.exports = function (app, config) {
         });
     });
 
-    app.get('/registry/:id', config.middleware, function (request, response, next) {
+    app.get('/schema-registry/:id', config.middleware, function (request, response, next) {
         var path = '/exhibit/registry/' + request.params.id;
 
         client.exists(path, function (err, status) {
@@ -44,7 +44,7 @@ module.exports = function (app, config) {
         });
     });
 
-    app.put('/registry/:id', config.middleware, function (request, response, next) {
+    app.put('/schema-registry/:id', config.middleware, function (request, response, next) {
 
         var setZookeeperData = function (err) {
             assert.ifError(err);
@@ -75,7 +75,7 @@ module.exports = function (app, config) {
         });
     });
 
-    app.delete('/registry/:id', config.middleware, function (request, response, next) {
+    app.delete('/schema-registry/:id', config.middleware, function (request, response, next) {
         var path = '/exhibit/registry/' + request.params.id;
         client.exists(path, function (err, status) {
             if (status) {
