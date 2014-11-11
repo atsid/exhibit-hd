@@ -9,7 +9,7 @@ module.exports = function (app, config) {
     );
     client.connect();
 
-    app.get('/schema-registry', config.middleware, function (request, response, next) {
+    app.get('/registry', config.middleware, function (request, response, next) {
         client.getChildren('/exhibit/registry', function (err, nodes) {
             assert.ifError(err);
 
@@ -18,28 +18,33 @@ module.exports = function (app, config) {
             async.each(nodes, function (id, callback) {
                 client.getData('/exhibit/registry/' + id, function (err, obj) {
                     assert.ifError(err);
-                    console.log('Found object with id ' + id);
                     someObj[id] = JSON.parse(obj.toString());
 
                     callback();
                 })
             }, function (err) {
                 assert.ifError(err);
-                response.send(someObj);
+                response.send(someObj).end();
             })
         });
     });
 
-    app.get('/schema-registry/:id', config.middleware, function (request, response, next) {
-        client.getData('/exhibit/registry/' + request.params.id, function (err, obj) {
-            assert.ifError(err);
-            console.log('Found object with id ' + request.params.id);
-            response.status(200).send(JSON.parse(obj.toString())).end();
+    app.get('/registry/:id', config.middleware, function (request, response, next) {
+        var path = '/exhibit/registry/' + request.params.id;
+
+        client.exists(path, function (err, status) {
+            if (status) {
+                client.getData(path, function (err, obj) {
+                    assert.ifError(err);
+                    response.status(200).send(JSON.parse(obj.toString())).end();
+                });
+            } else {
+                response.status(404).end();
+            }
         });
     });
 
-    app.put('/schema-registry/:id', config.middleware, function (request, response, next) {
-        console.log("save schema with id " + request.params.id);
+    app.put('/registry/:id', config.middleware, function (request, response, next) {
 
         var setZookeeperData = function (err) {
             assert.ifError(err);
@@ -53,8 +58,6 @@ module.exports = function (app, config) {
                     }
 
                     assert.ifError(error);
-
-                    console.log('Node: %s is created.', path);
 
                     response.status(200);
                     response.end();
@@ -72,7 +75,7 @@ module.exports = function (app, config) {
         });
     });
 
-    app.delete('/schema-registry/:id', config.middleware, function (request, response, next) {
+    app.delete('/registry/:id', config.middleware, function (request, response, next) {
         var path = '/exhibit/registry/' + request.params.id;
         client.exists(path, function (err, status) {
             if (status) {
