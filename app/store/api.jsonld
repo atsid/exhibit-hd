@@ -2,5 +2,7 @@
     "@context": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/vocab.jsonld",
     "@id": "http://exhibit-hd-node.atsid.cloudbees.net/api/",
     "@type": "EntryPoint",
-    "services": "http://exhibit-hd-node.atsid.cloudbees.net/api/services"
+    "services": "http://exhibit-hd-node.atsid.cloudbees.net/service-registry",
+    "schemas": "http://exhibit-hd-node.atsid.cloudbees.net/schema-registry",
+    "mock": "http://exhibit-hd-node.atsid.cloudbees.net/mock-services"
 }

@@ -26,12 +26,12 @@ app.get("/api/", function (req, res, next) {
     res.status(200).sendFile(__dirname + "/store/api.jsonld");
 });
 
-app.get("/api/services", function (req, res, next) {
+app.get("/mock-services", function (req, res, next) {
     res.set("Content-Type", "application/ld+json");
     res.status(200).sendFile(__dirname + "/store/list.jsonld");
 });
 
-app.get("/api/services/:id", function (req, res, next) {
+app.get("/mock-services/:id", function (req, res, next) {
     res.set("Content-Type", "application/ld+json");
     res.status(200).sendFile(__dirname + "/store/" + req.params.id + ".jsonld");
 });

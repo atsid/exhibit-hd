@@ -9,7 +9,7 @@ module.exports = function (app, config) {
     );
     client.connect();
 
-    app.get('/registry', config.middleware, function (request, response, next) {
+    app.get('/schema-registry', config.middleware, function (request, response, next) {
         client.getChildren('/exhibit/registry', function (err, nodes) {
             assert.ifError(err);
 
@@ -30,7 +30,7 @@ module.exports = function (app, config) {
         });
     });
 
-    app.get('/registry/:id', config.middleware, function (request, response, next) {
+    app.get('/schema-registry/:id', config.middleware, function (request, response, next) {
         client.getData('/exhibit/registry/' + request.params.id, function (err, obj) {
             assert.ifError(err);
             console.log('Found object with id ' + request.params.id);
@@ -38,7 +38,7 @@ module.exports = function (app, config) {
         });
     });
 
-    app.put('/registry/:id', config.middleware, function (request, response, next) {
+    app.put('/schema-registry/:id', config.middleware, function (request, response, next) {
         console.log("save schema with id " + request.params.id);
 
         var setZookeeperData = function (err) {
@@ -72,7 +72,7 @@ module.exports = function (app, config) {
         });
     });
 
-    app.delete('/registry/:id', config.middleware, function (request, response, next) {
+    app.delete('/schema-registry/:id', config.middleware, function (request, response, next) {
         var path = '/exhibit/registry/' + request.params.id;
         client.exists(path, function (err, status) {
             if (status) {
