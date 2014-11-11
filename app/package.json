@@ -6,11 +6,11 @@
         "start": "node app/main.js"
     },
     "dependencies": {
-        "express": "3.2.3",
-        "newrelic": "*",
-        "mongodb": "*",
-        "rql": "*",
-        "async": "*",
-        "clone": "*"
+        "express": "4.10.2",
+        "newrelic": "1.13.2",
+        "mongodb": "1.4.19",
+        "rql": "0.3.3",
+        "async": "0.9.0",
+        "clone": "0.1.18"
     }
 }
