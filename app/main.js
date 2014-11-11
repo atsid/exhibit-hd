@@ -14,7 +14,13 @@ app.use(express.static(__dirname));
 app.use("/schema", express.static(__dirname + "/schema"));
 
 registry(app, {
-    middleware: [express.bodyParser()]
+    middleware: [express.bodyParser()],
+    zookeepers: {
+        servers: [{
+            host: '54.148.38.31',
+            port: 2181
+        }]
+    }
 });
 
 serviceRegistry(app, {
