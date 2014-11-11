@@ -1,6 +1,7 @@
 {
     "@context": {
-        "vocab": "http://exhibit-hd-node.atsid.cloudbees.net/schema/Store.jsonld#",
+        "vocab": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/vocab#",
+        "store": "http://exhibit-hd-node.atsid.cloudbees.net/schema-registry/Store.jsonld#",
         "hydra": "http://www.w3.org/ns/hydra/core#",
         "ApiDocumentation": "hydra:ApiDocumentation",
         "property": {
@@ -40,7 +41,7 @@
             "@type": "@id"
         }
     },
-    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/schema/Store.jsonld",
+    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/schema-registry/Store.jsonld",
     "@type": "ApiDocumentation",
     "supportedClass": [{
         "@id": "http://www.w3.org/ns/hydra/core#Resource",
@@ -64,8 +65,8 @@
             "writeonly": false
         }]
     }, {
-        "@id": "vocab:Catalog",
-        "@type": "hydra:Class",
+        "@id": "store:Catalog",
+        "@type": "vocab:Model",
         "subClassOf": null,
         "label": "Product Catalog",
         "description": "The Catalog is the storefront for viewing and buying products.",
@@ -80,11 +81,11 @@
         }],
         "supportedProperty": [{
             "property": {
-                "@id": "vocab:Catalog/products",
+                "@id": "store:Catalog/products",
                 "@type": "hydra:Link",
                 "label": "products",
                 "description": "List of available products",
-                "domain": "vocab:Catalog",
+                "domain": "store:Catalog",
                 "range": "http://www.w3.org/ns/hydra/core#Collection",
                 "supportedOperation": [{
                     "@id": "_:product_create",
@@ -92,8 +93,8 @@
                     "method": "POST",
                     "label": "Create a new Product",
                     "description": null,
-                    "expects": "vocab:Product",
-                    "returns": "vocab:Product",
+                    "expects": "store:Product",
+                    "returns": "store:Product",
                     "statusCodes": [{
                         "code": 201,
                         "description": "The new Product was successfully created."
@@ -116,8 +117,8 @@
             "writeonly": false
         }]
     },{
-        "@id": "vocab:Product",
-        "@type": "hydra:Class",
+        "@id": "store:Product",
+        "@type": "vocab:Model",
         "subClassOf": null,
         "label": "Product",
         "description": "Represents a product available in the store.",
@@ -128,7 +129,7 @@
             "label": "Read a Product entity",
             "description": "Retrieve an existing Product entity.",
             "expects": "null",
-            "returns": "vocab:Product",
+            "returns": "store:Product",
             "statusCodes": [{
                 "code": 404,
                 "description": "The Product you are trying to retrieve does not exist."
@@ -139,8 +140,8 @@
             "method": "PUT",
             "label": "Replaces a Product entity",
             "description": "Complete update to an existing Product entity, via PUT replacement.",
-            "expects": "vocab:Product",
-            "returns": "vocab:Product",
+            "expects": "store:Product",
+            "returns": "store:Product",
             "statusCodes": [{
                 "code": 400,
                 "description": "The Product you are submitting is malformed."
@@ -160,11 +161,11 @@
         }],
         "supportedProperty": [{
             "property": {
-                "@id": "vocab:Product/name",
+                "@id": "store:Product/name",
                 "@type": "rdf:Property",
                 "label": "name",
                 "description": "The name of the Product",
-                "domain": "vocab:Product",
+                "domain": "store:Product",
                 "range": "http://www.w3.org/2001/XMLSchema#string",
                 "supportedOperation": []
             },
@@ -175,11 +176,11 @@
             "writeonly": false
         }, {
             "property": {
-                "@id": "vocab:Product/price",
+                "@id": "store:Product/price",
                 "@type": "rdf:Property",
                 "label": "price",
                 "description": "The price of the Product",
-                "domain": "vocab:Product",
+                "domain": "store:Product",
                 "range": "http://www.w3.org/2001/XMLSchema#decimal",
                 "supportedOperation": []
             },

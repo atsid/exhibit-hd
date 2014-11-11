@@ -69,8 +69,16 @@
             ]
         },
         {
-            "@id": "vocab:ServiceInstance",
+            "@id": "vocab:Model",
             "@type": "hydra:Class",
+            "hydra:title": "Model",
+            "hydra:description": null,
+            "supportedOperation": [],
+            "supportedProperty": []
+        },
+        {
+            "@id": "vocab:ServiceInstance",
+            "@type": "vocab:Model",
             "subClassOf": null,
             "label": "ServiceInstance",
             "description": "A Service registered in the system.",
@@ -174,11 +182,85 @@
                                 "expects": null,
                                 "returns": "http://www.w3.org/ns/hydra/core#Collection",
                                 "statusCodes": []
+                            },
+                            {
+                                "@id": "_:service_create",
+                                "@type": "hydra:Operation",
+                                "method": "POST",
+                                "label": "Creates a new service entity",
+                                "description": null,
+                                "expects": "vocab:ServiceInstance",
+                                "returns": "vocab:ServiceInstance",
+                                "statusCodes": []
                             }
                         ]
                     },
                     "hydra:title": "services",
                     "hydra:description": "The collection of all services",
+                    "required": null,
+                    "readonly": true,
+                    "writeonly": false
+                },
+                {
+                    "property": {
+                        "@id": "vocab:EntryPoint/schemas",
+                        "@type": "hydra:Link",
+                        "label": "schemas",
+                        "description": "The collection of all schemas registered",
+                        "domain": "vocab:EntryPoint",
+                        "range": "http://www.w3.org/ns/hydra/core#Collection",
+                        "supportedOperation": [
+                            {
+                                "@id": "_:schema_collection_retrieve",
+                                "@type": "hydra:Operation",
+                                "method": "GET",
+                                "label": "Retrieves all schema entities",
+                                "description": null,
+                                "expects": null,
+                                "returns": "http://www.w3.org/ns/hydra/core#Collection",
+                                "statusCodes": []
+                            },
+                            {
+                                "@id": "_:schema_replace",
+                                "@type": "hydra:Operation",
+                                "method": "PUT",
+                                "label": "Creates a new service entity",
+                                "description": null,
+                                "expects": "vocab:Model",
+                                "returns": "vocab:Model",
+                                "statusCodes": []
+                            }
+                        ]
+                    },
+                    "hydra:title": "schemas",
+                    "hydra:description": "The collection of all schemas",
+                    "required": null,
+                    "readonly": true,
+                    "writeonly": false
+                },
+                {
+                    "property": {
+                        "@id": "vocab:EntryPoint/mocks",
+                        "@type": "hydra:Link",
+                        "label": "mocks",
+                        "description": "The collection of mock services",
+                        "domain": "vocab:EntryPoint",
+                        "range": "http://www.w3.org/ns/hydra/core#Collection",
+                        "supportedOperation": [
+                            {
+                                "@id": "_:mock_collection_retrieve",
+                                "@type": "hydra:Operation",
+                                "method": "GET",
+                                "label": "Retrieves all mock instances",
+                                "description": null,
+                                "expects": null,
+                                "returns": "http://www.w3.org/ns/hydra/core#Collection",
+                                "statusCodes": []
+                            }
+                        ]
+                    },
+                    "hydra:title": "mocks",
+                    "hydra:description": "The collection of all schemas",
                     "required": null,
                     "readonly": true,
                     "writeonly": false

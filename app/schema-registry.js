@@ -24,7 +24,15 @@ module.exports = function (app, config) {
                 })
             }, function (err) {
                 assert.ifError(err);
-                response.send(someObj).end();
+                var schemas = {
+                    members: []
+                };
+                Object.keys(someObj).forEach(function (key) {
+                    schemas.members.push({
+                        "@id": someObj[key]["@id"]
+                    });
+                });
+                response.send(schemas).end();
             })
         });
     });
@@ -36,7 +44,9 @@ module.exports = function (app, config) {
             if (status) {
                 client.getData(path, function (err, obj) {
                     assert.ifError(err);
+
                     response.status(200).send(JSON.parse(obj.toString())).end();
+
                 });
             } else {
                 response.status(404).end();
