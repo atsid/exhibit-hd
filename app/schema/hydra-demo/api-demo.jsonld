@@ -1,0 +1,8 @@
+{
+    "@context": "http://exhibit-hd-node.atsid.cloudbees.net/schema/hydra-demo/EntryPoint.jsonld",
+    "@id": "/hydra-demo/api-demo/",
+    "@type": "EntryPoint",
+    "issues": "/hydra-demo/api-demo/issues/",
+    "register_user": "/hydra-demo/api-demo/users/",
+    "users": "/hydra-demo/api-demo/users/"
+}

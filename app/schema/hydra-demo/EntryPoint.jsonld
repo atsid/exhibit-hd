@@ -1,7 +1,7 @@
 {
     "@context": {
         "hydra": "http://www.w3.org/ns/hydra/core#",
-        "vocab": "http://exhibit-hd-node.atsid.cloudbees.net/schema/hydra/vocab#",
+        "vocab": "http://exhibit-hd-node.atsid.cloudbees.net/schema/hydra-demo/vocab#",
         "EntryPoint": "vocab:EntryPoint",
         "issues": {
             "@id": "vocab:EntryPoint/issues",

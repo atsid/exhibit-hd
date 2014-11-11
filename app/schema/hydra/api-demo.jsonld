@@ -1,8 +1,0 @@
-{
-    "@context": "/hydra/api-demo/contexts/EntryPoint.jsonld",
-    "@id": "/hydra/api-demo/",
-    "@type": "EntryPoint",
-    "issues": "/hydra/api-demo/issues/",
-    "register_user": "/hydra/api-demo/users/",
-    "users": "/hydra/api-demo/users/"
-}
