@@ -9,14 +9,14 @@ module.exports = function (app, config) {
     );
     client.connect();
 
-    app.get('/schema-registry', config.middleware, function (request, response, next) {
-        client.getChildren('/exhibit/registry', function (err, nodes) {
+    app.get('/registry', config.middleware, function (request, response, next) {
+        client.getChildren('/exhibit/registry/schema', function (err, nodes) {
             assert.ifError(err);
 
             var someObj = {};
 
             async.each(nodes, function (id, callback) {
-                client.getData('/exhibit/registry/' + id, function (err, obj) {
+                client.getData('/exhibit/registry/schema/' + id, function (err, obj) {
                     assert.ifError(err);
                     someObj[id] = JSON.parse(obj.toString());
 
@@ -29,8 +29,8 @@ module.exports = function (app, config) {
         });
     });
 
-    app.get('/schema-registry/:id', config.middleware, function (request, response, next) {
-        var path = '/exhibit/registry/' + request.params.id;
+    app.get('/registry/:id', config.middleware, function (request, response, next) {
+        var path = '/exhibit/registry/schema/' + request.params.id;
 
         client.exists(path, function (err, status) {
             if (status) {
@@ -44,7 +44,7 @@ module.exports = function (app, config) {
         });
     });
 
-    app.put('/schema-registry/:id', config.middleware, function (request, response, next) {
+    app.put('/registry/:id', config.middleware, function (request, response, next) {
 
         var setZookeeperData = function (err) {
             assert.ifError(err);
@@ -65,7 +65,7 @@ module.exports = function (app, config) {
             );
         };
 
-        var path = '/exhibit/registry/' + request.params.id;
+        var path = '/exhibit/registry/schema/' + request.params.id;
         client.exists(path, function (err, status) {
             if (status) {
                 setZookeeperData(err);
@@ -75,8 +75,8 @@ module.exports = function (app, config) {
         });
     });
 
-    app.delete('/schema-registry/:id', config.middleware, function (request, response, next) {
-        var path = '/exhibit/registry/' + request.params.id;
+    app.delete('/registry/:id', config.middleware, function (request, response, next) {
+        var path = '/exhibit/registry/schema/' + request.params.id;
         client.exists(path, function (err, status) {
             if (status) {
                 client.remove(path, function (err) {
