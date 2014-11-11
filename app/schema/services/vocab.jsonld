@@ -1,0 +1,173 @@
+{
+    "@context": {
+        "vocab": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/vocab#",
+        "hydra": "http://www.w3.org/ns/hydra/core#",
+        "ApiDocumentation": "hydra:ApiDocumentation",
+        "property": {
+            "@id": "hydra:property",
+            "@type": "@id"
+        },
+        "readonly": "hydra:readonly",
+        "writeonly": "hydra:writeonly",
+        "supportedClass": "hydra:supportedClass",
+        "supportedProperty": "hydra:supportedProperty",
+        "supportedOperation": "hydra:supportedOperation",
+        "method": "hydra:method",
+        "expects": {
+            "@id": "hydra:expects",
+            "@type": "@id"
+        },
+        "returns": {
+            "@id": "hydra:returns",
+            "@type": "@id"
+        },
+        "statusCodes": "hydra:statusCodes",
+        "code": "hydra:statusCode",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "label": "rdfs:label",
+        "description": "rdfs:comment",
+        "domain": {
+            "@id": "rdfs:domain",
+            "@type": "@id"
+        },
+        "range": {
+            "@id": "rdfs:range",
+            "@type": "@id"
+        },
+        "subClassOf": {
+            "@id": "rdfs:subClassOf",
+            "@type": "@id"
+        }
+    },
+    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/vocab",
+    "@type": "ApiDocumentation",
+    "supportedClass": [
+        {
+            "@id": "http://www.w3.org/ns/hydra/core#Resource",
+            "@type": "hydra:Class",
+            "hydra:title": "Resource",
+            "hydra:description": null,
+            "supportedOperation": [],
+            "supportedProperty": []
+        },
+        {
+            "@id": "http://www.w3.org/ns/hydra/core#Collection",
+            "@type": "hydra:Class",
+            "hydra:title": "Collection",
+            "hydra:description": null,
+            "supportedOperation": [],
+            "supportedProperty": [
+                {
+                    "property": "http://www.w3.org/ns/hydra/core#member",
+                    "hydra:title": "members",
+                    "hydra:description": "The members of this collection.",
+                    "required": null,
+                    "readonly": false,
+                    "writeonly": false
+                }
+            ]
+        },
+        {
+            "@id": "vocab:Service",
+            "@type": "hydra:Class",
+            "subClassOf": null,
+            "label": "Service",
+            "description": "A Service registered in the system.",
+            "supportedOperation": [
+                {
+                    "@id": "_:service_retrieve",
+                    "@type": "hydra:Operation",
+                    "method": "GET",
+                    "label": "Retrieves a Service entity",
+                    "description": null,
+                    "expects": null,
+                    "returns": "vocab:Service",
+                    "statusCodes": []
+                }
+            ],
+            "supportedProperty": [
+                {
+                    "property": {
+                        "@id": "vocab:Service/name",
+                        "@type": "rdf:Property",
+                        "label": "name",
+                        "description": "The Service name",
+                        "domain": "vocab:Service",
+                        "range": "http://www.w3.org/2001/XMLSchema#string",
+                        "supportedOperation": []
+                    },
+                    "hydra:title": "name",
+                    "hydra:description": "The Service name",
+                    "required": null,
+                    "readonly": false,
+                    "writeonly": false
+                },
+                {
+                    "property": {
+                        "@id": "vocab:Service/root",
+                        "@type": "rdf:Property",
+                        "label": "root",
+                        "description": "The Service root path",
+                        "domain": "vocab:Service",
+                        "range": "http://www.w3.org/2001/XMLSchema#string",
+                        "supportedOperation": []
+                    },
+                    "hydra:title": "root",
+                    "hydra:description": "The Service root",
+                    "required": null,
+                    "readonly": false,
+                    "writeonly": false
+                }
+            ]
+        },
+        {
+            "@id": "vocab:EntryPoint",
+            "@type": "hydra:Class",
+            "subClassOf": null,
+            "label": "EntryPoint",
+            "description": "The main entry point or homepage of the API.",
+            "supportedOperation": [
+                {
+                    "@id": "_:entry_point",
+                    "@type": "hydra:Operation",
+                    "method": "GET",
+                    "label": "The APIs main entry point.",
+                    "description": null,
+                    "expects": null,
+                    "returns": "vocab:EntryPoint",
+                    "statusCodes": []
+                }
+            ],
+            "supportedProperty": [
+                {
+                    "property": {
+                        "@id": "vocab:EntryPoint/services",
+                        "@type": "hydra:Link",
+                        "label": "services",
+                        "description": "The collection of all services",
+                        "domain": "vocab:EntryPoint",
+                        "range": "http://www.w3.org/ns/hydra/core#Collection",
+                        "supportedOperation": [
+                            {
+                                "@id": "_:service_collection_retrieve",
+                                "@type": "hydra:Operation",
+                                "method": "GET",
+                                "label": "Retrieves all service entities",
+                                "description": null,
+                                "expects": null,
+                                "returns": "http://www.w3.org/ns/hydra/core#Collection",
+                                "statusCodes": []
+                            }
+                        ]
+                    },
+                    "hydra:title": "services",
+                    "hydra:description": "The collection of all services",
+                    "required": null,
+                    "readonly": true,
+                    "writeonly": false
+                }
+            ]
+        }
+    ]
+}

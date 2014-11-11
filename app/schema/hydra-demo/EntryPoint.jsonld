@@ -1,0 +1,23 @@
+{
+    "@context": {
+        "hydra": "http://www.w3.org/ns/hydra/core#",
+        "vocab": "http://exhibit-hd-node.atsid.cloudbees.net/schema/hydra-demo/vocab#",
+        "EntryPoint": "vocab:EntryPoint",
+        "issues": {
+            "@id": "vocab:EntryPoint/issues",
+            "@type": "@id"
+        },
+        "register_user": {
+            "@id": "vocab:EntryPoint/registerUser",
+            "@type": "@id"
+        },
+        "my_account": {
+            "@id": "vocab:EntryPoint/myAccount",
+            "@type": "@id"
+        },
+        "users": {
+            "@id": "vocab:EntryPoint/users",
+            "@type": "@id"
+        }
+    }
+}

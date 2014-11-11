@@ -1,0 +1,6 @@
+{
+    "@context": "http://exhibit-hd-node.atsid.cloudbees.net/schema/services/EntryPoint.jsonld",
+    "@id": "http://exhibit-hd-node.atsid.cloudbees.net/api",
+    "@type": "EntryPoint",
+    "services": "http://exhibit-hd-node.atsid.cloudbees.net/services"
+}
